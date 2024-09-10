@@ -11,8 +11,5 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\ReflectionExample\ReflectionExample.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="EventsHandler\" />
-	</ItemGroup>
 
 </Project>

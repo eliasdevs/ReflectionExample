@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using ReflectionExample.Dtos;
 
-namespace ReflectionExample.Api.Commands
+namespace ReflectionExample.Commands
 {
     /// <summary>
     /// 

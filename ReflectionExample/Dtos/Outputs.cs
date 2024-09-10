@@ -9,7 +9,7 @@ namespace ReflectionExample.Dtos
     /// <summary>
     /// 
     /// </summary>
-    public record Output1();
+    public record Output1(string salida);
 
     /// <summary>
     /// 
