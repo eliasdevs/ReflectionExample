@@ -24,13 +24,12 @@ namespace ReflectionExample.Handlers
             var baseEventType = typeof(BaseEvent<,>);
             // Filtrar los tipos que coincidan tanto en Command como en Result
             var matchingTypes = assembly.GetTypes()
-                .Where(t => t.BaseType != null && t.BaseType.IsGenericType
-                            && t.BaseType.GetGenericTypeDefinition() == baseEventType)
-                .Where(t => t.GetProperty(nameof(BaseEvent<TCommand, TResult>.Command))?.PropertyType == request.GetType()
-                            && t.GetProperty(nameof(BaseEvent<TCommand, TResult>.Result))?.PropertyType == result?.GetType())
-                .ToList(); // Obtener la lista de tipos coincidentes
+                .Where(t => t.BaseType != null && t.BaseType.IsGenericType && 
+                            t.BaseType.GetGenericTypeDefinition() == baseEventType &&
+                            t.GetProperty(nameof(BaseEvent<TCommand, TResult>.Command))?.PropertyType == request.GetType() && 
+                            t.GetProperty(nameof(BaseEvent<TCommand, TResult>.Result))?.PropertyType == result?.GetType())
+                .ToList();
 
-            // Aquí puedes manejar los tipos coincidentes como desees
             foreach (var targetType in matchingTypes)
             {
                 // Crear la instancia del tipo de evento pasando el comando y el resultado
