@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using ReflectionExample.Events;
 using ReflectionExample.Events.Events;
+using System.Diagnostics.Metrics;
 using System.Reflection;
 
 namespace ReflectionExample.Handlers
@@ -23,7 +24,7 @@ namespace ReflectionExample.Handlers
             
             var baseEventType = typeof(BaseEvent<,>);
             // Filtrar los tipos que coincidan tanto en Command como en Result
-            var matchingTypes = assembly.GetTypes()
+            List<Type> matchingTypes = assembly.GetTypes()
                 .Where(t => t.BaseType != null && t.BaseType.IsGenericType && 
                             t.BaseType.GetGenericTypeDefinition() == baseEventType &&
                             t.GetProperty(nameof(BaseEvent<TCommand, TResult>.Command))?.PropertyType == request.GetType() && 
@@ -32,14 +33,18 @@ namespace ReflectionExample.Handlers
 
             foreach (var targetType in matchingTypes)
             {
-                // Crear la instancia del tipo de evento pasando el comando y el resultado
-                var instance = Activator.CreateInstance(targetType, request, result);
+                int parameterCount = targetType.GetConstructors().Single().GetParameters().Length;
+
+                object? instance = parameterCount switch
+                {
+                    1 => Activator.CreateInstance(targetType, request),
+                    2=> Activator.CreateInstance(targetType, request, result),
+                    _ => throw new InvalidOperationException($"El constructor de {targetType.FullName} no es compatible con la cantidad de parámetros esperada.")
+                };
 
                 // Publicar el evento usando Mediator
                 if (instance is INotification notification)
-                {
                     await _mediator.Publish(notification, cancellationToken);
-                }
             }
 
             return result;

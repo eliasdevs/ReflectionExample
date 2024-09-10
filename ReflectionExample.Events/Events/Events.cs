@@ -11,20 +11,20 @@ namespace ReflectionExample.Events.Events
     /// <typeparam name="TResult"></typeparam>
     /// <param name="Comanda"></param>
     /// <param name="Result"></param>
-    public record BaseEvent<TCommand, TResult>(TCommand Command, TResult Result) : INotification where TCommand : IRequest<TResult>;
+    public abstract record BaseEvent<TCommand, TResult>(TCommand Command, TResult Result) : INotification where TCommand : IRequest<TResult>;
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="command"></param>
-    public record CommandExample1UnitEvent(CommandExample1Unit Command, Unit Result) : BaseEvent<CommandExample1Unit, Unit>(Command, Result);
+    public record CommandExample1UnitEvent(CommandExample1Unit Command) : BaseEvent<CommandExample1Unit, Unit>(Command, Unit.Value);
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="Command"></param>
     /// <param name="Result"></param>
-    public record CommandExample1UnitEvent2(CommandExample1Unit Command, Unit Result) : BaseEvent<CommandExample1Unit, Unit>(Command, Result);
+    public record CommandExample1UnitEvent2(CommandExample1Unit Command) : BaseEvent<CommandExample1Unit, Unit>(Command, Unit.Value);
 
     /// <summary>
     /// 
