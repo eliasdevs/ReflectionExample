@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using ReflectionExample.Events;
 using ReflectionExample.Events.Events;
-using System.Diagnostics.Metrics;
-using System.Reflection;
 
 namespace ReflectionExample.Handlers
 {
@@ -21,13 +19,13 @@ namespace ReflectionExample.Handlers
             TResult result = await ExecuteAsync(request, cancellationToken);
 
             var assembly = typeof(EventsMarker).Assembly;
-            
+
             var baseEventType = typeof(BaseEvent<,>);
             // Filtrar los tipos que coincidan tanto en Command como en Result
             List<Type> matchingTypes = assembly.GetTypes()
-                .Where(t => t.BaseType != null && t.BaseType.IsGenericType && 
+                .Where(t => t.BaseType != null && t.BaseType.IsGenericType &&
                             t.BaseType.GetGenericTypeDefinition() == baseEventType &&
-                            t.GetProperty(nameof(BaseEvent<TCommand, TResult>.Command))?.PropertyType == request.GetType() && 
+                            t.GetProperty(nameof(BaseEvent<TCommand, TResult>.Command))?.PropertyType == request.GetType() &&
                             t.GetProperty(nameof(BaseEvent<TCommand, TResult>.Result))?.PropertyType == result?.GetType())
                 .ToList();
 
@@ -38,7 +36,7 @@ namespace ReflectionExample.Handlers
                 object? instance = parameterCount switch
                 {
                     1 => Activator.CreateInstance(targetType, request),
-                    2=> Activator.CreateInstance(targetType, request, result),
+                    2 => Activator.CreateInstance(targetType, request, result),
                     _ => throw new InvalidOperationException($"El constructor de {targetType.FullName} no es compatible con la cantidad de parámetros esperada.")
                 };
 
