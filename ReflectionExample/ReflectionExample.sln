@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionExample.Api", "..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionExample.Handlers", "..\ReflectionExample.Handlers\ReflectionExample.Handlers.csproj", "{7A686A16-9D96-47BA-9F20-89451F4E9FB7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionExample.Events", "..\ReflectionExample.Events\ReflectionExample.Events.csproj", "{6A518F25-161B-4DC2-9185-2EFCE95601C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{7A686A16-9D96-47BA-9F20-89451F4E9FB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A686A16-9D96-47BA-9F20-89451F4E9FB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A686A16-9D96-47BA-9F20-89451F4E9FB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A518F25-161B-4DC2-9185-2EFCE95601C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A518F25-161B-4DC2-9185-2EFCE95601C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A518F25-161B-4DC2-9185-2EFCE95601C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A518F25-161B-4DC2-9185-2EFCE95601C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DB382D79-1BAB-428A-B5D2-9E29C62638FF} = {55A6C008-B373-4645-91C0-DDE9A22CE8BD}
 		{7A686A16-9D96-47BA-9F20-89451F4E9FB7} = {55A6C008-B373-4645-91C0-DDE9A22CE8BD}
+		{6A518F25-161B-4DC2-9185-2EFCE95601C9} = {55A6C008-B373-4645-91C0-DDE9A22CE8BD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16EEDADF-33EB-4A85-BB82-F7B185974316}

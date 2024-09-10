@@ -9,6 +9,7 @@
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
 	</ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\ReflectionExample.Events\ReflectionExample.Events.csproj" />
 	  <ProjectReference Include="..\ReflectionExample\ReflectionExample.csproj" />
 	</ItemGroup>
 

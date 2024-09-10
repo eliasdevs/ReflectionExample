@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using ReflectionExample.Handlers.Events;
+using ReflectionExample.Events.Events;
 
 namespace ReflectionExample.Handlers.EventsHandler
 {

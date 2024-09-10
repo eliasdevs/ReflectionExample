@@ -2,7 +2,7 @@
 using ReflectionExample.Commands;
 using ReflectionExample.Dtos;
 
-namespace ReflectionExample.Handlers.Events
+namespace ReflectionExample.Events.Events
 {
     /// <summary>
     /// 

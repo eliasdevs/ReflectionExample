@@ -1,5 +1,6 @@
 ﻿using MediatR;
-using ReflectionExample.Handlers.Events;
+using ReflectionExample.Events;
+using ReflectionExample.Events.Events;
 using System.Reflection;
 
 namespace ReflectionExample.Handlers
@@ -18,15 +19,14 @@ namespace ReflectionExample.Handlers
         {
             TResult result = await ExecuteAsync(request, cancellationToken);
 
-            var assembly = Assembly.GetExecutingAssembly();
-            var createCustomersType = request.GetType();
-
+            var assembly = typeof(EventsMarker).Assembly;
+            
             var baseEventType = typeof(BaseEvent<,>);
             // Filtrar los tipos que coincidan tanto en Command como en Result
             var matchingTypes = assembly.GetTypes()
                 .Where(t => t.BaseType != null && t.BaseType.IsGenericType
                             && t.BaseType.GetGenericTypeDefinition() == baseEventType)
-                .Where(t => t.GetProperty(nameof(BaseEvent<TCommand, TResult>.Command))?.PropertyType == createCustomersType
+                .Where(t => t.GetProperty(nameof(BaseEvent<TCommand, TResult>.Command))?.PropertyType == request.GetType()
                             && t.GetProperty(nameof(BaseEvent<TCommand, TResult>.Result))?.PropertyType == result?.GetType())
                 .ToList(); // Obtener la lista de tipos coincidentes
 
